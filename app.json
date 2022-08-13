@@ -5,27 +5,27 @@
   "env": {
     "BOT_TOKEN": {
       "description": "You guys know how to get it",
-      "required": "True"
+      "required": true
     },
     "CONFIG_JSON_URL": {
       "description": "To download the config.json it will orverwrite the existing one",
-      "required": "False"
+      "required": false
     },
     "STATUS_UPDATE_INTERVAL": {
       "description": "Message update intervel time",
-      "required": "False"
+      "required": false
     },
     "TIME_ZONE": {
       "description": "Timezone google it",
-      "required": "False"
+      "required": false
     },
     "HEADER_MSG": {
       "description": "A message for header side (you can use html)",
-      "required": "False"
+      "required": false
     },
     "FOOTER_MSG": {
       "description": "A message for footer side (you can use html)",
-      "required": "False"
+      "required": false
     }
   },
   "stack": "container",
