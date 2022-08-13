@@ -57,7 +57,7 @@ cp config-sample.json config.json
 
 ### Required Fields bots
 
-(**You can add upto 18 bots**)
+(**You can add upto 18 bots this will work slowly**)
 
 - `bot1` : it could be anything but it should unique name ex: `bot1`, `bot2`
 - `base_url_of_bot` : Read it from [here](https://github.com/anasty17/mirror-leech-telegram-bot#qbittorrent-1)
