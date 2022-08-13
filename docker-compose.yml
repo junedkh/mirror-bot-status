@@ -1,0 +1,12 @@
+version: "3.3"
+
+services:
+  app:
+    container_name: mirror-status-bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - CONFIG_JSON_URL=
+    command: python3 main.py
+    restart: on-failure

@@ -1,0 +1,15 @@
+{
+  "bots": {
+    "bot1": {
+      "base_url_of_bot": "http://0.0.0.0",
+      "host": "Heroku/Whatever",
+      "bot_uname": "@botfather"
+    }
+  },
+  "channels": {
+    "chat1": {
+      "chat_id": "-100987654321",
+      "message_id": "54321"
+    }
+  }
+}

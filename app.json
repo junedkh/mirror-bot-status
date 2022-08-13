@@ -1,0 +1,38 @@
+{
+  "name": "Mirror bot status",
+  "keywords": ["Mirror bot", "Mirror", "bot", "mtlb", "status", "statusbot"],
+  "repository": "https://github.com/junedkh/mirror-bot-status",
+  "env": {
+    "BOT_TOKEN": {
+      "description": "You guys know how to get it",
+      "required": "True"
+    },
+    "CONFIG_JSON_URL": {
+      "description": "To download the config.json it will orverwrite the existing one",
+      "required": "False"
+    },
+    "STATUS_UPDATE_INTERVAL": {
+      "description": "Message update intervel time",
+      "required": "False"
+    },
+    "TIME_ZONE": {
+      "description": "Timezone google it",
+      "required": "False"
+    },
+    "HEADER_MSG": {
+      "description": "A message for header side (you can use html)",
+      "required": "False"
+    },
+    "FOOTER_MSG": {
+      "description": "A message for footer side (you can use html)",
+      "required": "False"
+    }
+  },
+  "stack": "container",
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
+}
