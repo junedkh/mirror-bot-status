@@ -1,5 +1,7 @@
 {
   "name": "Mirror bot status",
+  "description": "Mirror bot status to a channel/group/user",
+  "logo": "https://cdn.jsdelivr.net/gh/junedkh/somesrcs@main/poster.png",
   "keywords": ["Mirror bot", "Mirror", "bot", "mtlb", "status", "statusbot"],
   "repository": "https://github.com/junedkh/mirror-bot-status",
   "env": {
