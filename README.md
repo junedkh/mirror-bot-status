@@ -81,7 +81,7 @@ bash sendMsg.sh -100123456789 123456:abcdefg
 
 This Script will send a message in group from the bot then you can get message id from it
 
-## Add few require imports [Here](https://github.com/anasty17/mirror-leech-telegram-bot/blob/b13df3494d57af77ab7017ac0a93947a31d0c9fd/web/wserver.py#L2)
+## Add few require imports [Here](https://github.com/anasty17/mirror-leech-telegram-bot/blob/master/web/wserver.py#L2)
 
 ```python
 from time import sleep, time
@@ -90,7 +90,7 @@ from subprocess import check_output
 from os import path as ospath
 ```
 
-## Add This Code Above This [Line](https://github.com/anasty17/mirror-leech-telegram-bot/blob/845d6710b475304cd6ec144ae0a7d9f814c931c5/web/wserver.py#L775)
+## Add This Code Above This [Line](https://github.com/anasty17/mirror-leech-telegram-bot/blob/master/web/wserver.py#L775)
 
 ```python
 if ospath.exists('.git'):
