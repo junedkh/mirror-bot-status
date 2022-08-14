@@ -12,10 +12,26 @@ from telegram.ext import Updater as tgUpdater
 
 basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', handlers=[StreamHandler()], level=INFO)
 
-CONFIG_JSON_URL = environ.get('CONFIG_JSON_URL')
-try:
-    if len(CONFIG_JSON_URL) == 0:
-        raise TypeError
+def getConfig(key):
+    return environ.get(key, None)
+
+CONFIG_ENV_URL = getConfig('CONFIG_ENV_URL') or None
+
+if CONFIG_ENV_URL:
+    try:
+        res = rget(CONFIG_ENV_URL)
+        if res.status_code == 200:
+            log_info("Downloading .env")
+            with open('.env', 'wb+') as f:
+                f.write(res.content)
+        else:
+            log_error(f"Failed to download .env {res.status_code}")
+    except Exception as e:
+        log_error(f"CONFIG_ENV_URL: {e}")
+
+CONFIG_JSON_URL = getConfig('CONFIG_JSON_URL') or None
+
+if CONFIG_JSON_URL:
     try:
         res = rget(CONFIG_JSON_URL)
         if res.status_code == 200:
@@ -23,19 +39,15 @@ try:
             with open('config.json', 'wb+') as f:
                 f.write(res.content)
         else:
-            log_error(f"Failed to download config.josn {res.status_code}")
+            log_error(f"Failed to download config.json {res.status_code}")
     except Exception as e:
         log_error(f"CONFIG_JSON_URL: {e}")
-except:
-    pass
 
 load_dotenv('.env', override=True)
 
 LOGGER = getLogger(__name__)
 
 
-def getConfig(key):
-    return environ.get(key, None)
 
 BOT_TOKEN = getConfig('BOT_TOKEN') or None
 if BOT_TOKEN is None:

@@ -21,6 +21,7 @@ cp sample.env .env
 - `HEADER_MSG`: A message for header side (you can use html)
 - `FOOTER_MSG`: A message for footer side (you can use html)
 - `CONFIG_JSON_URL`: To download the config.json it will orverwrite the existing one
+- `CONFIG_ENV_URL`: To download the .env it will orverwrite the existing one
 
 ## Config.json [Json](https://www.w3schools.com/whatis/whatis_json.asp)
 

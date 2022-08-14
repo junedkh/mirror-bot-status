@@ -8,5 +8,6 @@ services:
       dockerfile: Dockerfile
     environment:
       - CONFIG_JSON_URL=
+      - CONFIG_ENV_URL=
     command: python3 main.py
     restart: on-failure
