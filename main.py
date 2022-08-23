@@ -234,10 +234,10 @@ def main():
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
             msg = 'Restarted Successfully!'
-            else:
-                msg = 'Bot Restarted!'
-                
-    if len(msg.encode()) > 4000:
+     else:
+        msg = 'Bot Restarted!'
+        
+         if len(msg.encode()) > 4000:
         if 'Restarted Successfully!' in msg and cid == chat_id:
             bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
             osremove(".restartmsg")
