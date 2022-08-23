@@ -208,7 +208,28 @@ def restart(update, context):
     
 
 def main():
-    start_cleanup()
+    
+    _channels = channels.values()
+    if len(_channels) == 0:
+        LOGGER.warning("No channels found")
+        exit(1)
+    msg = f"{HEADER_MSG}\n"+"{}"+f"{footer()}"
+    status = edit_bot_status()
+    try:
+        for channel in _channels:
+            LOGGER.info(f"Updating {channel['chat_id']}: {channel['message_id']}")
+            sleep(0.5)
+            editMessage(msg.format("<code>Updating...</code>"), channel)
+            _status = msg.format(status)
+            sleep(0.5)
+            if len(_status.encode()) < 4000:
+                editMessage(_status, channel)
+            else:
+                LOGGER.warning(f"Message too long for {channel['chat_id']}")
+    except Exception as e:
+        LOGGER.error(f"Error: {e}")
+        
+        start_cleanup()
     if ospath.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
@@ -244,26 +265,6 @@ def main():
                                                 restart_handler = CommandHandler(BotCommands.RestartCommand, restart,
                                                                                  filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
                                                 dispatcher.add_handler(restart_handler)
-                                                
-    _channels = channels.values()
-    if len(_channels) == 0:
-        LOGGER.warning("No channels found")
-        exit(1)
-    msg = f"{HEADER_MSG}\n"+"{}"+f"{footer()}"
-    status = edit_bot_status()
-    try:
-        for channel in _channels:
-            LOGGER.info(f"Updating {channel['chat_id']}: {channel['message_id']}")
-            sleep(0.5)
-            editMessage(msg.format("<code>Updating...</code>"), channel)
-            _status = msg.format(status)
-            sleep(0.5)
-            if len(_status.encode()) < 4000:
-                editMessage(_status, channel)
-            else:
-                LOGGER.warning(f"Message too long for {channel['chat_id']}")
-    except Exception as e:
-        LOGGER.error(f"Error: {e}")
 
 if __name__ == '__main__':
     LOGGER.info("Starting...")
