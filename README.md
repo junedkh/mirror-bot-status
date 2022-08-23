@@ -90,7 +90,7 @@ from subprocess import check_output
 from os import path as ospath
 ```
 
-## Edit & Add require import like this from [Here](https://github.com/anasty17/mirror-leech-telegram-bot/blob/master/web/wserver.py#L10)
+## Edit & Add require import like this from [Here](https://github.com/anasty17/mirror-leech-telegram-bot/blob/master/web/wserver.py#L7)
 
 ```python
 from web.nodes import make_tree, get_readable_time, botStartTime
