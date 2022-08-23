@@ -161,6 +161,7 @@ def bot_status():
                 resp = resp.json()
                 s_msg += f'\n┌<b>Bot</b>: {bot["bot_uname"]} ✅\n'
                 s_msg += f'├<b>Commit Date</b>: {resp["commit_date"]}\n'
+                s_msg += f'├<b>Bot Uptime</b>: {resp["on_time"]}\n'
                 s_msg += f'├<b>Alive</b>: {get_readable_time(resp["uptime"])}\n'
                 s_msg += f'├<b>Host</b>: {bot["host"]}\n'
                 s_msg += f'├<b>Up</b>: {get_readable_size(resp["network"]["sent"])} '
