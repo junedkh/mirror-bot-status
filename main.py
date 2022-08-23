@@ -1,17 +1,14 @@
 from datetime import datetime
 from json import loads as json_loads
 from logging import INFO, StreamHandler, basicConfig, error as log_error, getLogger, info as log_info
-from commands import BotCMD
-from os import environ, path as ospath, remove as osremove, execl as osexecl
-from subprocess import run as srun, check_output
-from sys import executable
+from os import environ, path as ospath
 from time import sleep
 
 from dotenv import load_dotenv
 from pytz import timezone, utc
 from requests import get as rget
 from telegram.error import RetryAfter
-from telegram.ext import CommandHandler, Updater as tgUpdater
+from telegram.ext import Updater as tgUpdater
 
 basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', handlers=[StreamHandler()], level=INFO)
 
@@ -193,20 +190,6 @@ def edit_bot_status():
     msg += s_msg
     return msg
 
-def restart(update, context):
-    restart_message = sendMessage("Restarting...", context.bot, update.message)
-    if Interval:
-        Interval[0].cancel()
-        Interval.clear()
-    clean_all()
-    srun(["pkill", "-f", "main.py"])
-    with open(".restartmsg", "w") as f:
-        f.truncate(0)
-        f.write(f"{restart_message.chat.id}\n{restart_message.message_id}\n")
-    osexecl(executable, executable, "python3", "main.py")
-    
-    
-
 def main():
     
     _channels = channels.values()
@@ -228,46 +211,6 @@ def main():
                 LOGGER.warning(f"Message too long for {channel['chat_id']}")
     except Exception as e:
         LOGGER.error(f"Error: {e}")
-        
-        start_cleanup()
-    if ospath.isfile(".restartmsg"):
-        with open(".restartmsg") as f:
-            chat_id, msg_id = map(int, f)
-            msg = 'Restarted Successfully!'
-     else:
-        msg = 'Bot Restarted!'
-        for tag, links in data.items():
-            msg += f"\n\n{tag}: "
-            for index, link in enumerate(links, start=1):
-                msg += f" <a href='{link}'>{index}</a> |"
-                if len(msg.encode()) > 4000:
-                    if 'Restarted Successfully!' in msg and cid == chat_id:
-            bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
-            osremove(".restartmsg")
-            else:
-                try:
-                    bot.sendMessage(cid, msg, 'HTML', disable_web_page_preview=True)
-                    except Exception as e:
-                        LOGGER.error(e)
-                        msg = ''
-                        if 'Restarted Successfully!' in msg and cid == chat_id:
-                            bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
-                            osremove(".restartmsg")
-                            else:
-                                try:
-                                    bot.sendMessage(cid, msg, 'HTML', disable_web_page_preview=True)
-                                    except Exception as e:
-                                        LOGGER.error(e)
-                                        
-                                        if ospath.isfile(".restartmsg"):
-                                            with open(".restartmsg") as f:
-                                                chat_id, msg_id = map(int, f)
-                                                bot.edit_message_text("Restarted Successfully!", chat_id, msg_id)
-                                                osremove(".restartmsg")
-                                                
-                                                restart_handler = CommandHandler(BotCommands.RestartCommand, restart,
-                                                                                 filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
-                                                dispatcher.add_handler(restart_handler)
 
 if __name__ == '__main__':
     LOGGER.info("Starting...")
