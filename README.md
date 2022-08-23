@@ -90,6 +90,42 @@ from subprocess import check_output
 from os import path as ospath
 ```
 
+## Edit & Add require import like this from [Here](https://github.com/anasty17/mirror-leech-telegram-bot/blob/master/web/wserver.py#L10)
+
+```python
+from web.nodes import make_tree, get_readable_time, botStartTime
+```
+
+## Add require imports [Here](https://github.com/anasty17/mirror-leech-telegram-bot/blob/master/web/nodes.py#L4)
+
+```python
+from time import time
+```
+
+## Add This Code Under This [Line](https://github.com/anasty17/mirror-leech-telegram-bot/blob/master/web/nodes.py#L108)
+
+```python
+def get_readable_time(seconds: int) -> str:
+    result = ''
+    (days, remainder) = divmod(seconds, 86400)
+    days = int(days)
+    if days != 0:
+        result += f'{days}d'
+    (hours, remainder) = divmod(remainder, 3600)
+    hours = int(hours)
+    if hours != 0:
+        result += f'{hours}h'
+    (minutes, seconds) = divmod(remainder, 60)
+    minutes = int(minutes)
+    if minutes != 0:
+        result += f'{minutes}m'
+    seconds = int(seconds)
+    result += f'{seconds}s'
+    return result
+
+botStartTime = time()
+```
+
 ## Add This Code Above This [Line](https://github.com/anasty17/mirror-leech-telegram-bot/blob/master/web/wserver.py#L775)
 
 ```python
