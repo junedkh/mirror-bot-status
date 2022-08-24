@@ -101,7 +101,7 @@ else:
 
 @app.route('/status', methods=['GET'])
 def status():
-    bot_uptime = get_readable_time(time() - botStartTime)
+    bot_uptime = time() - botStartTime
     uptime = time() - boot_time()
     sent = net_io_counters().bytes_sent
     recv = net_io_counters().bytes_recv
