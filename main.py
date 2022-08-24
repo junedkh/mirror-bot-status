@@ -160,12 +160,25 @@ def bot_status():
             if resp.status_code == 200:
                 resp = resp.json()
                 s_msg += f'\n┌<b>Bot</b>: {bot["bot_uname"]} ✅\n'
-                s_msg += f'├<b>Commit Date</b>: {resp["commit_date"]}\n'
-                s_msg += f'├<b>Alive</b>: {get_readable_time(resp["uptime"])}\n'
+                try:
+                    s_msg += f'├<b>Commit Date</b>: {resp["commit_date"]}\n'
+                except:
+                    pass
+                try:
+                    s_msg += f'├<b>Bot Uptime</b>: {get_readable_time(resp["on_time"])}\n'
+                except:
+                    pass
+                try:
+                    s_msg += f'├<b>Alive</b>: {get_readable_time(resp["uptime"])}\n'
+                except:
+                    pass
                 s_msg += f'├<b>Host</b>: {bot["host"]}\n'
-                s_msg += f'├<b>Up</b>: {get_readable_size(resp["network"]["sent"])} '
-                s_msg += f'| <b>DL</b>: {get_readable_size(resp["network"]["recv"])}\n'
-                s_msg += f'└<b>Free Disk</b>: {get_readable_size(resp["free_disk"])}/{get_readable_size(resp["total_disk"])}\n'
+                try:
+                    s_msg += f'├<b>Up</b>: {get_readable_size(resp["network"]["sent"])} '
+                    s_msg += f'| <b>DL</b>: {get_readable_size(resp["network"]["recv"])}\n'
+                    s_msg += f'└<b>Free Disk</b>: {get_readable_size(resp["free_disk"])}/{get_readable_size(resp["total_disk"])}\n'
+                except:
+                    s_msg += '└<b>Something went wrong!</b>'
                 active_bots += 1
             else:
                 s_msg += f'\n┌<b>Bot</b>: {bot["bot_uname"]} ❌\n'

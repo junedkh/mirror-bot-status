@@ -93,6 +93,7 @@ from os import path as ospath
 ## Add This Code Above This [Line](https://github.com/anasty17/mirror-leech-telegram-bot/blob/master/web/wserver.py#L775)
 
 ```python
+botStartTime = time()
 if ospath.exists('.git'):
     commit_date = check_output(["git log -1 --date=format:'%y/%m/%d %H:%M' --pretty=format:'%cd'"], shell=True).decode()
 else:
@@ -100,12 +101,14 @@ else:
 
 @app.route('/status', methods=['GET'])
 def status():
+    bot_uptime = get_readable_time(time() - botStartTime)
     uptime = time() - boot_time()
     sent = net_io_counters().bytes_sent
     recv = net_io_counters().bytes_recv
     return {
         'commit_date': commit_date,
         'uptime': uptime,
+        'on_time': bot_uptime,
         'free_disk': disk_usage('.').free,
         'total_disk': disk_usage('.').total,
         'network': {
